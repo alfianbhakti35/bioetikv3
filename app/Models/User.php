@@ -28,6 +28,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'role',
+        'nim',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'phone'
+
     ];
 
     /**
@@ -66,7 +73,17 @@ class User extends Authenticatable
     public static function search($query)
     {
         return empty($query) ? static::query()
-            : static::where('name', 'like', '%'.$query.'%')
-                ->orWhere('email', 'like', '%'.$query.'%');
+            : static::where('name', 'like', '%' . $query . '%')
+            ->orWhere('email', 'like', '%' . $query . '%');
+    }
+
+    public function mahasiswaKonsultasis()
+    {
+        return $this->hasMany(Konsultasi::class, 'mahasiswa_id', 'id');
+    }
+
+    public function dosenKonsultasis()
+    {
+        return $this->hasMany(Konsultasi::class, 'dosen_id', 'id');
     }
 }
