@@ -18,8 +18,7 @@ class CreateKonsultasisTable extends Migration
             $table->foreignId('mahasiswa_id');
             $table->foreignId('dosen_id');
             $table->foreignId('rekam_medik_id')->nullable();
-            $table->boolean('rekam_medik');
-            $table->boolean('is_must')->default(false);
+            $table->boolean('rekam_medik')->default(false);
             $table->string('status')->default('PENDING');
             $table->timestamp('jadwal');
             $table->timestamps();

@@ -67,6 +67,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'username' => $request->username,
+                'role' => $request->role
             ]);
 
             // Resposne Register Success
@@ -135,5 +136,14 @@ class UserController extends Controller
                 'error' => $error,
             ], 'Gagal update profile', 500);
         }
+    }
+
+    public function getKonselor()
+    {
+        $konselor = User::where('role', 'KONSELOR')->get();
+
+        return ResponseFormatter::success([
+            'konselor' => $konselor
+        ], 'Daftar List Konselor');
     }
 }

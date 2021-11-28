@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\AssessmentController;
+use App\Http\Controllers\API\KonsultasiController;
 use App\Http\Controllers\API\UserController;
+use App\Models\Konsultasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +31,18 @@ Route::prefix('/v1')->group(function () {
         // Route for users
         Route::get('/user', [UserController::class, 'profile']);
         Route::post('/user', [UserController::class, 'updateProfile']);
+
+        // Konselor
+        Route::get('/konselor', [UserController::class, 'getKonselor']);
+
+        // Route konsultasi
+        Route::post('/konsultasi', [KonsultasiController::class, 'buatJadwal']);
+        Route::post('/konsultasikonfirmasi', [KonsultasiController::class, 'acceptKonsultasi']);
+        Route::post('/konsultasiselesai', [KonsultasiController::class, 'konsultasiSelesai']);
+
+        // Route Assessment
+        Route::get('/assessment', [AssessmentController::class, 'getall']);
+        Route::post('/assessment', [AssessmentController::class, 'store']);
     });
 });
 
